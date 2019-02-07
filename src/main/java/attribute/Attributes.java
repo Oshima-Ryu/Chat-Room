@@ -3,5 +3,7 @@ package attribute;
 import io.netty.util.AttributeKey;
 
 public interface Attributes {
-    AttributeKey<Boolean> LOGIN = AttributeKey.newInstance("login");
+//    AttributeKey<Boolean> LOGIN = AttributeKey.newInstance("login");
+    AttributeKey<Boolean> SESSION = AttributeKey.newInstance("session");
+
 }
