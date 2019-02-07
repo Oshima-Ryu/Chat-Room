@@ -17,14 +17,14 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         System.out.println(new Date() + ":收到客户端的登录请求......");
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
         loginResponsePacket.setVersion(loginRequestPacket.getVersion());
-        loginResponsePacket.setUserName(loginRequestPacket.getUsername());
+        loginResponsePacket.setUserName(loginRequestPacket.getUserName());
 
         if (valid(loginRequestPacket)){
             loginResponsePacket.setSuccess(true);
             String userId = randomUserId();
             loginResponsePacket.setUserId(userId);
-            System.out.println( new Date() + "[" + loginRequestPacket.getUsername() + "]登陆成功");
-            SessionUtil.bindSession(new Session(userId, loginRequestPacket.getUsername()), ctx.channel());
+            System.out.println( new Date() + "[" + loginRequestPacket.getUserName() + "]登陆成功");
+            SessionUtil.bindSession(new Session(userId, loginRequestPacket.getUserName()), ctx.channel());
 //            LoginUtil.markAsLogin(ctx.channel());
         } else {
             loginResponsePacket.setSuccess(false);

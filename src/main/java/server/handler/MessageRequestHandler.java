@@ -14,11 +14,13 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket ) {
         Session session = SessionUtil.getSession(ctx.channel());
+//        System.out.println(session);
 
         MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
         messageResponsePacket.setFromUserId(session.getUserId());
         messageResponsePacket.setFromUserName(session.getUserName());
         messageResponsePacket.setMessage(messageRequestPacket.getMessage());
+        System.out.println("from:"+session.getUserName()+" to:"+messageRequestPacket.getToUserId());
 
         Channel toUserChannel = SessionUtil.getChannel(messageRequestPacket.getToUserId());
 
@@ -30,6 +32,6 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
 //        System.out.println(new Date() + ":收到客户端的消息：" + messageRequestPacket.getMessage());
 //        messageResponsePacket.setMessage("服务端回复消息：【" + messageRequestPacket.getMessage() + "】");
 
-        ctx.channel().writeAndFlush(messageResponsePacket);
+//        ctx.channel().writeAndFlush(messageResponsePacket);
     }
 }

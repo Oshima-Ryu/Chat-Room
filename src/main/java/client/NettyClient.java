@@ -78,8 +78,8 @@ public class NettyClient {
             while(!Thread.interrupted()){
                 if(!SessionUtil.hasLogin(channel)){
                     System.out.println("输入用户名登录：");
-                    String userName = sc.next();
-                    loginRequestPacket.setUsername(userName);
+                    String userName = sc.nextLine();
+                    loginRequestPacket.setUserName(userName);
                     loginRequestPacket.setPassword("pwd");
                     channel.writeAndFlush(loginRequestPacket);
                     waitForLoginResponse();
@@ -97,7 +97,7 @@ public class NettyClient {
 
     private static void waitForLoginResponse(){
         try{
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }catch (InterruptedException ignored){}
     }
 }
