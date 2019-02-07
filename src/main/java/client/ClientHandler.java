@@ -9,6 +9,7 @@ import protocol.request.LoginRequestPacket;
 import protocol.response.LoginResponsePacket;
 import protocol.response.MessageResponsePacket;
 import util.LoginUtil;
+import util.SessionUtil;
 
 import java.util.Date;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx){
         System.out.println(new Date() + ":客户端开始登陆");
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-        loginRequestPacket.setUserId(UUID.randomUUID().toString());
+//        loginRequestPacket.setUserId(UUID.randomUUID().toString());
         loginRequestPacket.setUsername("www");
         loginRequestPacket.setPassword("pwd");
 
@@ -34,7 +35,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         if (packet instanceof LoginResponsePacket) {
             LoginResponsePacket loginResponsePacket = (LoginResponsePacket) packet;
             if(loginResponsePacket.isSuccess()){
-                LoginUtil.markAsLogin(ctx.channel());
+//                SessionUtil.markAsLogin(ctx.channel());
                 System.out.println(new Date() + ":客户端登陆成功");
             } else {
                 System.out.println(new Date() + ":客户端登录失败，原因：" + loginResponsePacket.getReason());
