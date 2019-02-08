@@ -10,6 +10,7 @@ import util.SessionUtil;
 public class LogoutRequestHandler extends SimpleChannelInboundHandler<LogoutRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LogoutRequestPacket msg) throws Exception {
+        System.out.println("登出");
         SessionUtil.unBindSession(ctx.channel());
         LogoutResponsePacket logoutResponsePacket = new LogoutResponsePacket();
         logoutResponsePacket.setSuccess(true);

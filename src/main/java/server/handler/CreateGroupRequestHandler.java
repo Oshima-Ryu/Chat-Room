@@ -17,6 +17,7 @@ public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<Creat
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket createGroupRequestPacket) throws Exception {
+        System.out.println("建立群聊");
         List<String> userIdList = createGroupRequestPacket.getUserIdList();
         List<String> userNameList = new ArrayList<>();
 
