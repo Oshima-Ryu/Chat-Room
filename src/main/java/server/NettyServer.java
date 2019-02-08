@@ -1,5 +1,7 @@
 package server;
 
+import client.handler.CreateGroupResponseHandler;
+import client.handler.LogoutResponseHandler;
 import codec.PacketDecoder;
 import codec.PacketEncoder;
 import codec.Spliter;
@@ -9,6 +11,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import server.handler.AuthHandler;
 import server.handler.LoginRequestHandler;
 import server.handler.MessageRequestHandler;
 
@@ -34,7 +37,10 @@ public class NettyServer {
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new CreateGroupResponseHandler());
+                        ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
