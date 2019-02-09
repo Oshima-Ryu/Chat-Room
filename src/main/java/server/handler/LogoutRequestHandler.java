@@ -11,6 +11,11 @@ public class LogoutRequestHandler extends SimpleChannelInboundHandler<LogoutRequ
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LogoutRequestPacket msg) throws Exception {
         System.out.println("登出");
+//        SessionUtil.unBindSession(ctx.channel());
+//        LogoutResponsePacket logoutResponsePacket = new LogoutResponsePacket();
+//        logoutResponsePacket.setSuccess(true);
+//        ctx.channel().writeAndFlush(logoutResponsePacket);
+
         SessionUtil.unBindSession(ctx.channel());
         LogoutResponsePacket logoutResponsePacket = new LogoutResponsePacket();
         logoutResponsePacket.setSuccess(true);
