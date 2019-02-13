@@ -2,6 +2,7 @@ package util;
 
 import attribute.Attributes;
 import io.netty.channel.Channel;
+import io.netty.channel.group.ChannelGroup;
 import session.Session;
 
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionUtil {
     private static final Map<String, Channel> userIdChannelMap = new ConcurrentHashMap<>();
+    private static final Map<String, ChannelGroup> groupIdChannelGroupMap = new ConcurrentHashMap<>();
 
     public static void bindSession(Session session, Channel channel){
         userIdChannelMap.put(session.getUserId(), channel);
@@ -35,5 +37,13 @@ public class SessionUtil {
 
     public static Channel getChannel(String userId){
         return userIdChannelMap.get(userId);
+    }
+
+    public static void bindChannelGroup(String groupId, ChannelGroup channelGroup){
+        groupIdChannelGroupMap.put(groupId, channelGroup);
+    }
+
+    public static ChannelGroup getChannelGroup(String groupId){
+        return groupIdChannelGroupMap.get(groupId);
     }
 }
