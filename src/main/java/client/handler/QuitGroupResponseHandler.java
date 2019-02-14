@@ -2,10 +2,16 @@ package client.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import protocol.response.QuitGroupResponsePacket;
 
-public class QuitGroupResponseHandler extends SimpleChannelInboundHandler {
+public class QuitGroupResponseHandler extends SimpleChannelInboundHandler<QuitGroupResponsePacket> {
+
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-
+    protected void channelRead0(ChannelHandlerContext ctx, QuitGroupResponsePacket quitGroupResponsePacket) throws Exception {
+        if (quitGroupResponsePacket.isSuccess()){
+            System.out.println("退出群聊成功：" + quitGroupResponsePacket.getGroupId());
+        } else {
+            System.err.println(quitGroupResponsePacket.getReason());
+        }
     }
 }
