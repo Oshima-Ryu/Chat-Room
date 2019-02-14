@@ -14,10 +14,12 @@ public class QuitGroupRequestHandler extends SimpleChannelInboundHandler<QuitGro
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QuitGroupRequestPacket quitGroupRequestPacket) throws Exception {
         String groupId = quitGroupRequestPacket.getGroupId();
+        System.out.println("群聊[" + groupId + "]有连接退出");
         ChannelGroup channelGroup = SessionUtil.getChannelGroup(groupId);
         channelGroup.remove(ctx.channel());
         QuitGroupResponsePacket quitGroupResponsePacket = new QuitGroupResponsePacket();
         quitGroupResponsePacket.setGroupId(groupId);
         quitGroupResponsePacket.setSuccess(true);
+        ctx.channel().writeAndFlush(quitGroupRequestPacket);
     }
 }
