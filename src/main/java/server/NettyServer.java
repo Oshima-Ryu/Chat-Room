@@ -1,6 +1,7 @@
 package server;
 
 import client.handler.CreateGroupResponseHandler;
+import client.handler.ListGroupMembersResponseHandler;
 import client.handler.LogoutResponseHandler;
 import codec.PacketDecoder;
 import codec.PacketEncoder;
@@ -39,6 +40,7 @@ public class NettyServer {
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new CreateGroupRequestHandler());
                         ch.pipeline().addLast(new JoinGroupRequestHandler());
+                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
                         ch.pipeline().addLast(new LogoutRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }

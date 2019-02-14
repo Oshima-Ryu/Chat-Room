@@ -6,7 +6,6 @@ import client.handler.*;
 import codec.PacketDecoder;
 import codec.PacketEncoder;
 import codec.Spliter;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -15,12 +14,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import protocol.PacketCodeC;
-import protocol.request.LoginRequestPacket;
-import protocol.request.MessageRequestPacket;
-import protocol.response.MessageResponsePacket;
-import server.handler.LoginRequestHandler;
-import util.LoginUtil;
 import util.SessionUtil;
 
 import java.util.Date;
@@ -51,6 +44,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new JoinGroupResponseHandler());
+                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
